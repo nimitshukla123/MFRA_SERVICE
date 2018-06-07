@@ -10444,14 +10444,14 @@ return jQuery;
 "use strict";
 
 
-var processInclude = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./base/util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
 
 window.jQuery = window.$ = __webpack_require__(0);
 
 
 $(document).ready(function () {
 	
-//	processInclude(require('.base/thirdParty/bootstrap'));
+
 	 
 	$("#myTab li:eq(1) a").tab('show');
 	
