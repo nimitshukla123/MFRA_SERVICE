@@ -11,76 +11,189 @@
         </div>
     </nav>
     
-	<section class="request-type-section clearfix">
+    <section class="environment-section clearfix">
 		<div class="container">
-			<h5 class="col-sm-12 sub-title">Select Request Type</h5>
+			<h5 class="col-sm-12 sub-title">Select Environment</h5>
 			<div class="row">
 				<div class="input-group">
 				  <div class="input-group-btn">
-					   <select class="request-url-type form-control">
-							<option value="get">GET</option>
-							<option value="get">POST</option>
+					   <select class="environment-type form-control">
+							<option value="prod">Production</option>
+							<option value="stg" selected="selected">Staging</option>
 						</select>
-				  </div>
-				  <input type="text" class="form-control" aria-label="...">
-				  <div class="input-group-btn">
-				  		<button type="button" class="btn btn-default">Params</button>
-				    	<button type="button" class="btn btn-primary check-response">SUBMIT</button>
 				  </div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="param-sections clearfix">
+	
+    <section class="dummy-api-section clearfix">
 		<div class="container">
-			<div class="input-title row">
-				<label class="col-sm-4">Key</label>
-				<label class="col-sm-4">Value</label>
-				<label class="col-sm-4">Description</label>
+			<h5 class="col-sm-12 sub-title">Choose Api For it's specification</h5>
+			<div class="row">
+				<div class="input-group">
+				  <div class="input-group-btn">
+					   <select class="api-type form-control">
+					  		<option value=""></option>
+							<option value="vci">VCI</option>
+							<option value="verifyEmail">Verify Email</option>
+							<option value="emailService">Email Service</option>
+						</select>
+				  </div>
+				</div>
 			</div>
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="New Key" />
-				<input type="text" class="form-control" placeholder="Value" />
-				<input type="text" class="form-control" placeholder="Description" />
+			
+			<div class="row api-specification hide">
+				<div class="vci hide">
+					<span class="prod api-env-type">
+						Production APi Details : 
+						<isprint value="${Resource.msg('vci.prod.url','service',null)}" />
+					</span>
+					<br/>
+					<span class="stg api-env-type">
+						Staging Api Details : 
+						<isprint value="${Resource.msg('vci.stg.url','service',null)}" />
+					</span>
+					<br/>
+					<span> Additional INFO : Replace parameters according to your requirement</span>
+				</div>
+				
+				<div class="emailService hide">
+					<span class="prod api-env-type">
+						Production APi Details : 
+						<isprint value="${Resource.msg('emailService.prod.url','service',null)}" />
+					</span>
+					<br/>
+					<span class="stg api-env-type">
+						Staging Api Details : 
+						<isprint value="${Resource.msg('emailService.stg.url','service',null)}" />
+					</span>
+					<br/>
+					<span> Additional INFO : Replace parameters according to your requirement</span>
+					<br>
+					
+					<span style="float: right;">
+						<h3>Sample Request</h3>
+						<textarea rows="5" cols="180" >
+							<isprint value="${Resource.msg('emailService.sample.request','service',null)}" encoding="on"  />
+						</textarea>
+					</span>
+				</div>
+				
 			</div>
 		</div>
 	</section>
+	
+	<section class="request-type-section clearfix">
+		<div class="container">
+			<form id="request-info-form">
+				<h5 class="col-sm-12 sub-title">Select Request Type</h5>
+				<div class="row">
+					<div class="input-group">
+					  <div class="input-group-btn">
+						   <select class="request-url-type form-control" name="req_type">
+								<option value="get">GET</option>
+								<option value="post">POST</option>
+							</select>
+					  </div>
+					  <input type="text" id="url-text" name="req_url" class="form-control" aria-label="..." data-href="${URLUtils.url('Service-Execute')}">
+					  <div class="input-group-btn">
+					  		<button type="button" class="btn btn-default params-button">Params</button>
+					    	<button type="button" class="btn btn-primary check-response">SUBMIT</button>
+					  </div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	
+	<section class="param-sections clearfix hide">
+		<div class="container">
+			
+			<div class="input-title row">
+				<label class="col-sm-4">Key</label>
+				<label class="col-sm-4">Value</label>
+			</div>
+			<form id="paramsForm">
+				<div class="input-group param-fields">
+					<input type="text" class="form-control" id="key_1" name="key_1" placeholder="New Key" />
+					<input type="text" class="form-control" id="value_1" name="value_1" placeholder="Value" />
+				</div>
+			</form>
+			<div class="input-group-btn params-button-container">
+		  		<button type="button" class="btn btn-default params-add">Add More</button>
+		  	</div>
+		</div>
+	</section>
+	
 	<section class="response-tabbing clearfix">
 		<div class="container">
 			<div class="tadding-content">
 				<ul class="nav nav-tabs nav-justified" role="tablist">
 					<li role="presentation" class="nav-item active"><a class="nav-link active" href="#authorization" aria-controls="Authorization" role="tab" data-toggle="tab">Authorization</a></li>
 					<li role="presentation" class="nav-item"><a class="nav-link" href="#headers" aria-controls="headers" role="tab" data-toggle="tab">Headers</a></li>
-					<li role="presentation" class="nav-item"><a class="nav-link" href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Body</a></li>
-					<li role="presentation" class="nav-item"><a class="nav-link" href="#prerequest" aria-controls="settings" role="tab" data-toggle="tab">Pre-request Script</a></li>
+					<li role="presentation" class="nav-item"><a class="nav-link" href="#body" aria-controls="messages" role="tab" data-toggle="tab">Body</a></li>
 				</ul>
 
 				  <!-- Tab panes -->
 				<div class="tab-content">
+				
 					<div role="tabpanel" class="tab-pane active" id="authorization">
-						<h3>Section A</h3>
-						<p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
-					
+						<form id="authForm">
+							<div class="row">
+								<div class="input-group">
+								  <div class="input-group-btn">
+									   <select class="auth-type form-control" id="selected-auth-type" name="selected_auth">
+									  		<option value=""></option>
+											<option value="basic">Basic</option>
+											<option value="bearer">Bearer</option>
+										</select>
+								  </div>
+								</div>
+							</div>
+							
+							
+							<div class="auth-fields hide">
+								<div class="bearer auth-field-details">
+									<div class="input-group">
+										<input type="text" class="form-control"  name="token" placeholder="bearer token" />
+									</div>
+								</div>
+								
+								<div class="basic auth-field-details">
+									<div class="input-group">
+										<input type="text" class="form-control" name="basicUserName" placeholder="username" />
+										<input type="text" class="form-control" name="basicPassword" placeholder="passowrd" />
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
+					
 					<div role="tabpanel" class="tab-pane" id="headers">
 						<div class="input-title row">
 							<label class="col-sm-4">Key</label>
 							<label class="col-sm-4">Value</label>
-							<label class="col-sm-4">Description</label>
 						</div>
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="New Key" />
-							<input type="text" class="form-control" placeholder="Value" />
-							<input type="text" class="form-control" placeholder="Description" />
-						</div>
+						
+						<form id="headersForm">
+							<div class="input-group headers-field">
+								<input type="text" class="form-control" id="headerkey_1" name="headerkey_1" placeholder="New Key" />
+								<input type="text" class="form-control" id="headervalue_1" name="headervalue_1" placeholder="Value" />
+							</div>
+						</form>
+						
+						<div class="input-group-btn headers-button-container">
+		  					<button type="button" class="btn btn-default headers-add">Add More</button>
+		  				</div>
 					</div>
-					<div role="tabpanel" class="tab-pane" id="messages">
-						<h3>Section C</h3>
-						<p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
-					</div>
-					<div role="tabpanel" class="tab-pane" id="prerequest">
-						<h3>Section D</h3>
-						<p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+					
+					
+					<div role="tabpanel" class="tab-pane" id="body">
+						<h3>Requset Body</h3>
+						<form id="reqBody">
+							<textarea rows="15" cols="180" name="reqBody" id="reqBody"></textarea>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -92,11 +205,13 @@
 			<h5 class="col-sm-12 sub-title">Response</h5>
 			<div class="row">
 				<div class="col-sm" id="response">
-
+					<textarea rows="5" cols="180"></textarea>
 				</div>
 			</div>
 		</div>
 	</section>
+	
+	
 	
 	<footer class="be-bottom-footer">
        <div class="container">
