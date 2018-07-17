@@ -1,10 +1,12 @@
 <!--- TEMPLATENAME: servicePanel.isml --->
 <isdecorate template="common/layout/serviceDecorator">
+
     <isscript>
         var assets = require('*/cartridge/scripts/assets');
         assets.addJs('/js/servicePanel.js');
         assets.addCss('/css/servicePanel.css');
     </isscript>
+    
 	<nav class="navbar navbar-expand be-top-header">
 		<div class="container">
 			<div class="page-title"><strong>Dashboard</strong></div>
@@ -27,62 +29,8 @@
 		</div>
 	</section>
 	
-    <section class="dummy-api-section clearfix">
-		<div class="container">
-			<h5 class="col-sm-12 sub-title">Choose Api For it's specification</h5>
-			<div class="row">
-				<div class="input-group">
-				  <div class="input-group-btn">
-					   <select class="api-type form-control">
-					  		<option value=""></option>
-							<option value="vci">VCI</option>
-							<option value="verifyEmail">Verify Email</option>
-							<option value="emailService">Email Service</option>
-						</select>
-				  </div>
-				</div>
-			</div>
-			
-			<div class="row api-specification hide">
-				<div class="vci hide">
-					<span class="prod api-env-type">
-						Production APi Details : 
-						<isprint value="${Resource.msg('vci.prod.url','service',null)}" />
-					</span>
-					<br/>
-					<span class="stg api-env-type">
-						Staging Api Details : 
-						<isprint value="${Resource.msg('vci.stg.url','service',null)}" />
-					</span>
-					<br/>
-					<span> Additional INFO : Replace parameters according to your requirement</span>
-				</div>
-				
-				<div class="emailService hide">
-					<span class="prod api-env-type">
-						Production APi Details : 
-						<isprint value="${Resource.msg('emailService.prod.url','service',null)}" />
-					</span>
-					<br/>
-					<span class="stg api-env-type">
-						Staging Api Details : 
-						<isprint value="${Resource.msg('emailService.stg.url','service',null)}" />
-					</span>
-					<br/>
-					<span> Additional INFO : Replace parameters according to your requirement</span>
-					<br>
-					
-					<span style="float: right;">
-						<h3>Sample Request</h3>
-						<textarea rows="5" cols="180" >
-							<isprint value="${Resource.msg('emailService.sample.request','service',null)}" encoding="on"  />
-						</textarea>
-					</span>
-				</div>
-				
-			</div>
-		</div>
-	</section>
+    <iscomment> Including template to show api details </iscomment>
+    <isinclude template="details/apiDetails" />
 	
 	<section class="request-type-section clearfix">
 		<div class="container">
@@ -94,6 +42,7 @@
 						   <select class="request-url-type form-control" name="req_type">
 								<option value="get">GET</option>
 								<option value="post">POST</option>
+								<option value="put">PUT</option>
 							</select>
 					  </div>
 					  <input type="text" id="url-text" name="req_url" class="form-control" aria-label="..." data-href="${URLUtils.url('Service-Execute')}">
@@ -178,8 +127,8 @@
 						
 						<form id="headersForm">
 							<div class="input-group headers-field">
-								<input type="text" class="form-control" id="headerkey_1" name="headerkey_1" placeholder="New Key" />
-								<input type="text" class="form-control" id="headervalue_1" name="headervalue_1" placeholder="Value" />
+								<input type="text" class="form-control key" id="headerkey_1" placeholder="New Key" />
+								<input type="text" class="form-control value" id="headervalue_1" placeholder="Value" />
 							</div>
 						</form>
 						
@@ -211,6 +160,9 @@
 		</div>
 	</section>
 	
+	<section class="loader">
+		<div class="loading hide">Loading&#8230;</div>
+	</section>
 	
 	
 	<footer class="be-bottom-footer">

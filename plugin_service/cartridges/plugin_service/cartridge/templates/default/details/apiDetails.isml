@@ -1,0 +1,64 @@
+<!--- TEMPLATENAME: apiDetails.isml --->
+<section class="dummy-api-section clearfix">
+	<div class="container">
+		<h5 class="col-sm-12 sub-title">Choose Api For it's specification</h5>
+		<div class="row">
+			<div class="input-group">
+			  <div class="input-group-btn">
+				   <select class="api-type form-control">
+				  		<option value=""></option>
+						<option value="vci">VCI</option>
+						<option value="verifyEmail">Verify Email</option>
+						<option value="emailService">Email Service</option>
+					</select>
+			  </div>
+			</div>
+		</div>
+		
+		<div class="row api-specification hide">
+			<div class="vci hide">
+				<div class="prod api-env-type">
+					<isprint value="${Resource.msg('prod.api.text','service',null)}" />
+					<isprint value="${Resource.msg('vci.prod.url','service',null)}" />
+				</div>
+				<div class="stg api-env-type">
+					<isprint value="${Resource.msg('stg.api.text','service',null)}" />
+					<isprint value="${Resource.msg('vci.stg.url','service',null)}" />
+				</div>
+				<div class="additional-info"> <isprint value="${Resource.msg('additional.info','service',null)}" /> </div>
+			</div>
+			
+			<div class="emailService hide">
+				<div class="prod api-env-type">
+					 <isprint value="${Resource.msg('prod.api.text','service',null)}" />
+					<isprint value="${Resource.msg('emailService.prod.url','service',null)}" />
+				</div>
+				<div class="stg api-env-type">
+					<isprint value="${Resource.msg('stg.api.text','service',null)}" /> 
+					<isprint value="${Resource.msg('emailService.stg.url','service',null)}" />
+				</div>
+				<div class="additional-info"> <isprint value="${Resource.msg('additional.info','service',null)}" /> </div>
+				
+				<div class="sample-request api-env-type">
+					<a id="floatbar" href="#">
+				    <div class="popup"><isprint value="${Resource.msg('emailService.sample.request','service',null)}" encoding="on"  /></div>
+				   	 <isprint value="${'click here For Sample Request Data'}" />
+					</a>
+				</div>
+			</div>
+			
+			<div class="verifyEmail hide">
+				<div class="prod api-env-type">
+					 <isprint value="${Resource.msg('prod.api.text','service',null)}" />
+					<isprint value="${Resource.msg('verifyEmail.prod.url','service',null)}" />
+				</div>
+				<div class="stg api-env-type">
+					<isprint value="${Resource.msg('stg.api.text','service',null)}" /> 
+					<isprint value="${Resource.msg('verifyEmail.stg.url','service',null)}" />
+				</div>
+				<div class="additional-info"> <isprint value="${Resource.msg('additional.info','service',null)}" /> </div>
+			</div>
+			
+		</div>
+	</div>
+</section>
